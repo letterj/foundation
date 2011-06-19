@@ -17,6 +17,11 @@ if [ -n "$BASH_VERSION" ]; then
 fi
 
 # set PATH so it includes user's private etc if it exists
+if [ -d "$HOME/lib" ] ; then
+    PATH="$HOME/lib:$PATH"
+fi
+
+# set PATH so it includes user's private etc if it exists
 if [ -d "$HOME/etc" ] ; then
     PATH="$HOME/etc:$PATH"
 fi

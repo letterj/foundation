@@ -1,0 +1,11 @@
+#! /bin/bash
+
+
+sudo apt-get update
+
+# General
+sudo apt-get install vim screen
+
+# Python
+sudo apt-get install python-setuptools python-nose
+

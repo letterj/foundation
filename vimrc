@@ -3,8 +3,8 @@ syntax on                       " syntax highlighting on
 
 " General
 set backup                      " make backup files
-set backupdir=~/tmp             " where to put backup files
-set directory=~/tmp             " directory to place swap files in
+set backupdir=/tmp             " where to put backup files
+set directory=/tmp             " directory to place swap files in
 set tabstop=4
 set expandtab
 

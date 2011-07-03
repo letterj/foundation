@@ -1,0 +1,2 @@
+nosetests tests --exe --with-coverage --cover-package <project name> --cover-erase
+rm -f .coverage

@@ -1,0 +1,17 @@
+
+
+
+packages.sh:
+    Commands to install debian packages for different situations
+
+post_setup.sh:
+    A script to setup some basic characteristics
+
+profile:
+    A bash ".profile" file containing my perferred setup
+
+py_skeleton:
+    A skeleton python project from LPTHW
+ 
+vimrc:
+    My preferred ".vimrc" file    

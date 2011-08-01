@@ -6,11 +6,18 @@ set backup                      " make backup files
 set backupdir=/tmp             " where to put backup files
 set directory=/tmp             " directory to place swap files in
 set tabstop=4
+set shiftwidth=4
 set expandtab
+
+" NERD_tree config
+let NERDTreeChDirMode=2
+let NERDTreeIgnore=['\.vim$', '\~$', '\.pyc$', '\.swp$']
+let NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$',  '\~$']
+let NERDTreeShowBookmarks=1
 
 "UI
 set laststatus=2 " always show the status line
-set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
+" set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
 "              | | | | |  |   |      |  |     |    |
 "              | | | | |  |   |      |  |     |    + current 
 "              | | | | |  |   |      |  |     |       column
@@ -30,19 +37,17 @@ set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
 set term=builtin_ansi
 "set verbose=9
 
-
-autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
-autocmd BufRead *.py inoremap # X^H#
-autocmd BufRead *.py set tabstop=4
-autocmd BufRead *.py set shiftwidth=4
-autocmd BufRead *.py set smarttab
-autocmd BufRead *.py set expandtab
-autocmd BufRead *.py set softtabstop=4
-autocmd BufRead *.py set autoindent
-autocmd BufRead *.py highlight BadWhitespace ctermbg=red guibg=red
-autocmd BufRead *.py match BadWhitespace /^\t\+/
-autocmd BufRead *.py match BadWhitespace /\s\+$/
+set statusline=%F%m%r%h%w\ [TYPE=%Y\ %{&ff}]\ [%l/%L\ (%p%%)
+filetype plugin indent on
+au FileType py set autoindent
+au FileType py set smartindent
+au FileType py set textwidth=79 " PEP-8 Friendly
+au FileType py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
+au FileType py inoremap # X^H#
+au FileType py highlight BadWhitespace ctermbg=red guibg=red
+au FileType py match BadWhitespace /^\t\+/
+au FileType py match BadWhitespace /\s\+$/
 
 
 "Arduino
-autocmd BufNewFile,BufReadPre *.pde setf arduino
+au BufNewFile,BufReadPre *.pde setf arduino

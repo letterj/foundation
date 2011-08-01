@@ -73,4 +73,9 @@ apt-get install nmap
 # Set up LogWatch
 apt-get install logwatch --yes
 
+# Install unzip
+apt-get unstall unzip --yes
 
+# Setup vim
+apt-get install vim --yes
+update-alternatives --set editor /usr/bin/vim.basic

@@ -79,3 +79,6 @@ apt-get unstall unzip --yes
 # Setup vim
 apt-get install vim --yes
 update-alternatives --set editor /usr/bin/vim.basic
+
+# Install python-software-properties
+apt-get install python-software-properties

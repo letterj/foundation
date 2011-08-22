@@ -51,3 +51,17 @@ au FileType py match BadWhitespace /\s\+$/
 
 "Arduino
 au BufNewFile,BufReadPre *.pde setf arduino
+
+" Remove any trailing whitespace that is in the file
+autocmd BufRead,BufWrite *.py if ! &bin | silent! %s/\s\+$//ge | endif
+
+" This shows what you are typing as a command.
+set showcmd
+
+" Remap jj to <Escape> in insert mode
+inoremap jj <Esc>  
+
+"A little easier way to switch between buffers
+map <C-j> :bprev<CR>
+map <C-k> :bnext<CR> 
+

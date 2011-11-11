@@ -37,5 +37,10 @@ if [ -f /etc/bash_completion ]; then
     export PS1='\h:\u:\w $(__git_ps1 "(%s) ")'
 fi
 
-# remove bad hosts from the known_hosts file
-sshdelhost () {sed -i "$1d" $HOME/.ssh/known_hosts ; }
+# Functions
+# *********
+
+# remove line $1 from the known_hosts file
+function sshdelhost () {
+sed -i "$1d" $HOME/.ssh/known_hosts
+}

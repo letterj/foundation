@@ -44,3 +44,10 @@ fi
 function sshdelhost () {
 sed -i "$1d" $HOME/.ssh/known_hosts
 }
+
+# Alias
+# #####
+
+# 
+alias gl='git log --graph --pretty="format:%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset"'
+

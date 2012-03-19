@@ -34,7 +34,7 @@ fi
 # Added to show git branches
 if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
-    export PS1='\h:\u:\w $(__git_ps1 "(%s) ")'
+    export PS1='\h:\u:\w $(__git_ps1 "(%s)")$ '
 fi
 
 # Functions

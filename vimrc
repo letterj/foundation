@@ -65,3 +65,12 @@ inoremap jj <Esc>
 map <C-j> :bprev<CR>
 map <C-k> :bnext<CR> 
 
+"Disable Arrow keys
+inoremap  <Up>     <NOP>
+inoremap  <Down>   <NOP>
+inoremap  <Left>   <NOP>
+inoremap  <Right>  <NOP>
+noremap   <Up>     <NOP>
+noremap   <Down>   <NOP>
+noremap   <Left>   <NOP>
+noremap   <Right>  <NOP>

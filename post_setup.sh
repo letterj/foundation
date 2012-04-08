@@ -33,9 +33,9 @@ echo 'AllowUsers letterj' >> /etc/ssh/sshd_config
 # Change 120 to 20
 sed -i 's/LoginGraceTime 120/LoginGraceTime 20/g' /etc/ssh/sshd_config
 
-# Add AllowAgentForwarding no
+# Add AllowAgentForwarding yes 
 echo ' ' >> /etc/ssh/sshd_config
-echo 'AllowAgentForwarding no' >> /etc/ssh/sshd_config
+echo 'AllowAgentForwarding Yes' >> /etc/ssh/sshd_config
 
 services ssh restart
 

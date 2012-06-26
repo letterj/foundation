@@ -50,4 +50,4 @@ sed -i "$1d" $HOME/.ssh/known_hosts
 
 # 
 alias gl='git log --graph --pretty="format:%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset"'
-
+alias gus='git fetch upstream && git merge upstream/master'

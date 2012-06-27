@@ -2,7 +2,7 @@ tmux new-session -s jarvis -n system -d
 tmux new-window -n nova -t jarvis
 tmux new-window -n lunr -t jarvis
 tmux new-window -n garage -t jarvis
-tmux split-window -h -p 50 -t jarvis:3
+tmux split-window -h -p 50 -t jarvis:4
 tmux new-window -n repos-pub -t jarvis
 tmux new-window -n repos-rax -t jarvis
 tmux send-keys -t jarvis:4.1 'cd ~/garage' C-m

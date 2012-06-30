@@ -1,0 +1,12 @@
+tmux new-session -s homer -n system -d
+tmux new-window -n nova -t homer
+tmux new-window -n lunr -t homer
+tmux new-window -n lab -t homer
+tmux split-window -h -p 50 -t homer:4
+tmux new-window -n repos-pub -t homer
+tmux new-window -n repos-letterj -t homer
+tmux send-keys -t homer:4.1 'cd ~/lab' C-m
+tmux send-keys -t homer:4.2'cd ~/lab' C-m
+tmux send-keys -t homer:5 'cd ~/repos-pub' C-m
+tmux send-keys -t homer:6 'cd ~/repos-letterj' C-m
+tmux attach -t homer

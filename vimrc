@@ -9,11 +9,9 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 
-" NERD_tree config
-let NERDTreeChDirMode=2
-let NERDTreeIgnore=['\.vim$', '\~$', '\.pyc$', '\.swp$']
-let NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$',  '\~$']
-let NERDTreeShowBookmarks=1
+"pathogen
+call pathogen#infect()
+call pathogen#helptags()
 
 "UI
 set laststatus=2 " always show the status line
@@ -51,9 +49,6 @@ au FileType py match BadWhitespace /\s\+$/
 
 "Arduino
 au BufNewFile,BufReadPre *.pde setf arduino
-
-" Remove any trailing whitespace that is in the file
-autocmd BufRead,BufWrite *.py if ! &bin | silent! %s/\s\+$//ge | endif
 
 " This shows what you are typing as a command.
 set showcmd

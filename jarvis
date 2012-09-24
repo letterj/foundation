@@ -1,12 +1,15 @@
 tmux new-session -s jarvis -n system -d
 tmux new-window -n nova -t jarvis
 tmux new-window -n lunr -t jarvis
+tmux new-window -n cinder -t jarvis
 tmux new-window -n garage -t jarvis
-tmux split-window -h -p 50 -t jarvis:4
+tmux split-window -h -p 50 -t jarvis:5
 tmux new-window -n repos-pub -t jarvis
 tmux new-window -n repos-rax -t jarvis
-tmux send-keys -t jarvis:4.1 'cd ~/garage' C-m
-tmux send-keys -t jarvis:4.2'cd ~/garage' C-m
-tmux send-keys -t jarvis:5 'cd ~/repos-pub' C-m
-tmux send-keys -t jarvis:6 'cd ~/repos-rax' C-m
+tmux new-window -n repos-openstack -t jarvis
+tmux send-keys -t jarvis:5.1 'cd ~/garage' C-m
+tmux send-keys -t jarvis:5.2'cd ~/garage' C-m
+tmux send-keys -t jarvis:6 'cd ~/repos-pub' C-m
+tmux send-keys -t jarvis:7 'cd ~/repos-rax' C-m
+tmux send-keys -t jarvis:8 'cd ~/repos-openstack' C-m
 tmux attach -t jarvis 

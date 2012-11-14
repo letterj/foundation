@@ -1,53 +1,87 @@
-# ~/.profile: executed by the command interpreter for login shells.
-# This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login
-# exists.
-# see /usr/share/doc/bash/examples/startup-files for examples.
-# the files are located in the bash-doc package.
+# Added for MacPorts
+export PATH=/Users/letterj/ec2lab:/Users/letterj/ec2lab/ec2-api-tools/bin:/Users/letterj/ec2lab/ec2-api-tools/lib:/usr/local/git/bin:$PATH
+export PATH=${PATH}:$HOME/gsutil
+export EDITOR=vim
 
-# the default umask is set in /etc/profile; for setting the umask
-# for ssh logins, install and configure the libpam-umask package.
-#umask 022
+[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
-# if running bash
-if [ -n "$BASH_VERSION" ]; then
-    # include .bashrc if it exists
-    if [ -f "$HOME/.bashrc" ]; then
-    . "$HOME/.bashrc"
-    fi
-fi
+# Added for Amazon Web Services 
+# ec2
+export EC2_HOME=~/ec2lab/ec2-api-tools
+export JAVA_HOME=/Library/Java/Home
 
-# set PATH so it includes user's private etc if it exists
-if [ -d "$HOME/lib" ] ; then
-    PATH="$HOME/lib:$PATH"
-fi
+# letterj@jbpconsulting.com
+# export EC2_PRIVATE_KEY=~/ec2lab/.ec2_jbpc/pk-DHUT3TRG6JZLCMZ4W67ATC5HISAAIU2J.pem 
+# export EC2_CERT=~/ec2lab/.ec2_jbpc/cert-DHUT3TRG6JZLCMZ4W67ATC5HISAAIU2J.pem  
+# letterj@gmail.com
+export EC2_PRIVATE_KEY=~/ec2lab/.ec2_letterj/pk-DHUT3TRG6JZLCMZ4W67ATC5HISAAIU2J.pem 
+export EC2_CERT=~/ec2lab/.ec2_letterj/cert-DHUT3TRG6JZLCMZ4W67ATC5HISAAIU2J.pem  
 
-# set PATH so it includes user's private etc if it exists
-if [ -d "$HOME/etc" ] ; then
-    PATH="$HOME/etc:$PATH"
-fi
+# Added for ls colors
+export CLICOLOR=1
+# export LSCOLORS=ExFxCxDxBxegedabagacad
+export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
+
+# Command alias
+alias ls='ls -G'
+alias ll='ls -alh'
+alias ':q'='exit'
+
+
+# Settings
+set -o vi
+
+# Terminal Settings
+export TERM=xterm-color
 
 # set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
+if [ -d ~/bin ] ; then
+    PATH=~/bin:"${PATH}"
 fi
+
+# iTerm Tab and Title Customization and prompt customization
+
+# Put the string " [bash]   hostname::/full/directory/path"
+# in the title bar using the command sequence
+# \[\e]2;[bash]   \h::\]$PWD\[\a\]
+
+# Put the penultimate and current directory 
+# in the iterm tab
+# \[\e]1;\]$(basename $(dirname $PWD))/\W\[\a\]
+
+# Make a simple command-line prompt:  bash-$
+# PS1=$'\[\e]2;[bash]   \h::\]$PWD\[\a\]\[\e]1;\]$(basename "$(dirname "$PWD")")/\W\[\a\][\h::]-\$ '
+PS1='\h:\W \u$ '
+
+
+# Tell git not to verify ssl certificates
+export GIT_SSL_NO_VERIFY=1
 
 # Added to show git branches
-if [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-    export PS1='\h:\u:\w $(__git_ps1 "(%s)")$ '
+if [ -f ~/bin/git_completion ]; then
+    . ~/bin/git_completion
+    echo "git"
+    export PS1='\h:\u:\w $(__git_ps1 "(%s) ")$ '
 fi
 
-# Functions
-# *********
+# Speed up mail
+#
+# ls -lah ~/Library/Mail/Envelope\ Index
+# sqlite3 ~/Library/Mail/Envelope\ Index vacuum subjects;
+# ls -lah ~/Library/Mail/Envelope\ Index
+#
+# sqlite3 ~/Library/Mail/Envelope\ Index vacuum body;
 
-# remove line $1 from the known_hosts file
-function sshdelhost () {
-sed -i "$1d" $HOME/.ssh/known_hosts
+# ######################
+# user defined functions
+# ######################
+
+# autocomplete known hosts
+function autoCompleteKnownHosts() {
+local list=($(awk '{print $1}' ~/.ssh/known_hosts | cut -d, -f1));
+local cur=${COMP_WORDS[COMP_CWORD]};
+COMPREPLY=($(compgen -W '${list[@]}' -- $cur ))
 }
+complete -F autoCompleteKnownHosts ssh
 
-# Alias
-# #####
-
-# 
 alias gl='git log --graph --pretty="format:%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset"'
-

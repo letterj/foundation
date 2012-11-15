@@ -60,7 +60,6 @@ export GIT_SSL_NO_VERIFY=1
 # Added to show git branches
 if [ -f ~/bin/git_completion ]; then
     . ~/bin/git_completion
-    echo "git"
     export PS1='\h:\u:\w $(__git_ps1 "(%s) ")$ '
 fi
 

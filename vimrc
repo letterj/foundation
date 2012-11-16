@@ -10,8 +10,8 @@ set shiftwidth=4
 set expandtab
 
 "pathogen
-call pathogen#infect()
-call pathogen#helptags()
+"call pathogen#infect()
+"call pathogen#helptags()
 
 "UI
 set laststatus=2 " always show the status line

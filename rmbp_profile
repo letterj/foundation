@@ -81,6 +81,6 @@ local list=($(awk '{print $1}' ~/.ssh/known_hosts | cut -d, -f1));
 local cur=${COMP_WORDS[COMP_CWORD]};
 COMPREPLY=($(compgen -W '${list[@]}' -- $cur ))
 }
-complete -F autoCompleteKnownHosts ssh
+complete -F autoCompleteKnownHosts ssh scp
 
 alias gl='git log --graph --pretty="format:%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset"'

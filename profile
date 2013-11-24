@@ -42,11 +42,13 @@ fi
 
 # Functions
 # *********
-
-# remove line $1 from the known_hosts file
-function sshdelhost () {
-sed -i "$1d" $HOME/.ssh/known_hosts
+# autocomplete known hosts
+function autoCompleteKnownHosts() {
+local list=($(awk '{print $1}' ~/.ssh/known_hosts | cut -d, -f1));
+local cur=${COMP_WORDS[COMP_CWORD]};
+COMPREPLY=($(compgen -W '${list[@]}' -- $cur ))
 }
+complete -F autoCompleteKnownHosts ssh scp
 
 # Alias
 # #####

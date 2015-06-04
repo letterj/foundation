@@ -1,79 +1,51 @@
-# Added for MacPorts
-export PATH=/Users/letterj/ec2lab:/Users/letterj/ec2lab/ec2-api-tools/bin:/Users/letterj/ec2lab/ec2-api-tools/lib:/usr/local/git/bin:$PATH
-export PATH=${PATH}:$HOME/gsutil
-export EDITOR=vim
+# ~/.profile: executed by the command interpreter for login shells.
+# This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login
+# exists.
+# see /usr/share/doc/bash/examples/startup-files for examples.
+# the files are located in the bash-doc package.
 
-[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
+# the default umask is set in /etc/profile; for setting the umask
+# for ssh logins, install and configure the libpam-umask package.
+#umask 022
 
-# Added for Amazon Web Services 
-# ec2
-export EC2_HOME=~/ec2lab/ec2-api-tools
-export JAVA_HOME=/Library/Java/Home
+# add postgres.app to path
+PATH="/Applications/Postgres.app/Contents/Versions/9.4/bin:$PATH"
 
-# letterj@jbpconsulting.com
-# export EC2_PRIVATE_KEY=~/ec2lab/.ec2_jbpc/pk-DHUT3TRG6JZLCMZ4W67ATC5HISAAIU2J.pem 
-# export EC2_CERT=~/ec2lab/.ec2_jbpc/cert-DHUT3TRG6JZLCMZ4W67ATC5HISAAIU2J.pem  
-# letterj@gmail.com
-export EC2_PRIVATE_KEY=~/ec2lab/.ec2_letterj/pk-DHUT3TRG6JZLCMZ4W67ATC5HISAAIU2J.pem 
-export EC2_CERT=~/ec2lab/.ec2_letterj/cert-DHUT3TRG6JZLCMZ4W67ATC5HISAAIU2J.pem  
+# added for virtualenv
+export WORKON_HOME=$HOME/.virtualenvs
 
-# Added for ls colors
-export CLICOLOR=1
-# export LSCOLORS=ExFxCxDxBxegedabagacad
-export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
+# if running bash
+if [ -n "$BASH_VERSION" ]; then
+    # include .bashrc if it exists
+    if [ -f "$HOME/.bashrc" ]; then
+    . "$HOME/.bashrc"
+    fi
+fi
 
-# Command alias
-alias ls='ls -G'
-alias ll='ls -alh'
-alias ':q'='exit'
+# set PATH so it includes user's private etc if it exists
+if [ -d "$HOME/lib" ] ; then
+    PATH="$HOME/lib:$PATH"
+fi
 
-
-# Settings
-set -o vi
-
-# Terminal Settings
-export TERM=xterm-color
+# set PATH so it includes user's private etc if it exists
+if [ -d "$HOME/etc" ] ; then
+    PATH="$HOME/etc:$PATH"
+fi
 
 # set PATH so it includes user's private bin if it exists
-if [ -d ~/bin ] ; then
-    PATH=~/bin:"${PATH}"
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
 fi
-
-# iTerm Tab and Title Customization and prompt customization
-
-# Put the string " [bash]   hostname::/full/directory/path"
-# in the title bar using the command sequence
-# \[\e]2;[bash]   \h::\]$PWD\[\a\]
-
-# Put the penultimate and current directory 
-# in the iterm tab
-# \[\e]1;\]$(basename $(dirname $PWD))/\W\[\a\]
-
-# Make a simple command-line prompt:  bash-$
-# PS1=$'\[\e]2;[bash]   \h::\]$PWD\[\a\]\[\e]1;\]$(basename "$(dirname "$PWD")")/\W\[\a\][\h::]-\$ '
-PS1='\h:\W \u$ '
-
-
-# Tell git not to verify ssl certificates
-export GIT_SSL_NO_VERIFY=1
 
 # Added to show git branches
-if [ -f ~/bin/git_completion ]; then
-    . ~/bin/git_completion
-    export PS1='\h:\u:\w $(__git_ps1 "(%s) ")$ '
-fi
+export PS1="\u@\h \W\[\033[37m\]\$(git_branch)\[\033[00m\] $ "
 
-# Speed up mail
-#
-# ls -lah ~/Library/Mail/Envelope\ Index
-# sqlite3 ~/Library/Mail/Envelope\ Index vacuum subjects;
-# ls -lah ~/Library/Mail/Envelope\ Index
-#
-# sqlite3 ~/Library/Mail/Envelope\ Index vacuum body;
-
-# ######################
-# user defined functions
-# ######################
+# Functions
+# *********
+# get the current git branch
+git_branch() {
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
 
 # autocomplete known hosts
 function autoCompleteKnownHosts() {
@@ -83,4 +55,9 @@ COMPREPLY=($(compgen -W '${list[@]}' -- $cur ))
 }
 complete -F autoCompleteKnownHosts ssh scp
 
+# Alias
+# #####
+
+# 
 alias gl='git log --graph --pretty="format:%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset"'
+alias gfm='git fetch upstream && git merge upstream/master'

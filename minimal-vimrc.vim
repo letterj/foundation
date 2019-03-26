@@ -10,7 +10,7 @@
 "     for Unix and OS/2:  ~/.vimrc
 "  for MS-DOS and Win32:  $VIM\_vimrc
 "
-"  If you don't understand a setting in here, just type ':h setting'.
+"  If you don't understand a setting in here, just type ":h 'setting".
 
 " Use Vim settings, rather than Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
